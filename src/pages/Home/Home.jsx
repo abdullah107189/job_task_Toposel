@@ -9,10 +9,12 @@ import {
   FaTransgender,
   FaSearch,
 } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
   const token = localStorage.getItem("token");
+  useAuth();
 
   const { data: users = [], isFetching } = useQuery({
     queryKey: ["users", searchInput],

@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { tokenContext } from "../../provider/TokenProvider";
 
 const Register = () => {
+  const { setToken } = useContext(tokenContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -32,6 +34,7 @@ const Register = () => {
       console.log(data);
       if (data?.token) {
         localStorage.setItem("token", data?.token);
+        setToken(true);
       }
       if (data.result?.insertedId) {
         setFormData({

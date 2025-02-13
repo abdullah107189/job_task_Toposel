@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import TokenProvider from "./provider/TokenProvider";
 
 const queryClient = new QueryClient();
 
@@ -34,9 +35,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster position="bottom-left" reverseOrder={false} />
-    </QueryClientProvider>
+    <TokenProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster position="bottom-left" reverseOrder={false} />
+      </QueryClientProvider>
+    </TokenProvider>
   </StrictMode>
 );

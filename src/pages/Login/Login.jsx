@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { tokenContext } from "../../provider/TokenProvider";
 
 const Login = () => {
+  const { setToken } = useContext(tokenContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ const Login = () => {
       if (data.status === true) {
         toast.success("Login Successful");
         localStorage.setItem("token", data?.token);
+        setToken(true);
         navigate("/");
         setLoading(false);
       } else {
@@ -57,7 +60,7 @@ const Login = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Enter your email" 
+          placeholder="Enter your email"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -76,7 +79,7 @@ const Login = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Enter your password" 
+          placeholder="Enter your password"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
