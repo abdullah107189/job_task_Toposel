@@ -57,7 +57,7 @@ const Login = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="Enter your email" // ✅ Placeholder Added
+          placeholder="Enter your email" 
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -76,7 +76,7 @@ const Login = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="Enter your password" // ✅ Placeholder Added
+          placeholder="Enter your password" 
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />

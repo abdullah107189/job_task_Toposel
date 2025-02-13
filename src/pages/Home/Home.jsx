@@ -12,15 +12,25 @@ import {
 
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
+  const token = localStorage.getItem("token");
+
   const { data: users = [], isFetching } = useQuery({
     queryKey: ["users", searchInput],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:4545/searchUser?query=${searchInput}`
+        `http://localhost:4545/searchUser?query=${searchInput}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
       return data;
     },
+    enabled: !!token,
   });
+
   return (
     <div className="p-4">
       <h1 className="text-4xl text-center font-bold mb-4">All User Info</h1>
@@ -59,7 +69,9 @@ const Home = () => {
         </div>
       ) : users.length === 0 ? (
         <div className="text-2xl text-center my-10 font-semibold">
-          Not Found Data
+          {!token
+            ? "If you want to show user's card then Login or Register"
+            : "Not Found Data"}
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-4">
