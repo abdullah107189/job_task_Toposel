@@ -30,7 +30,10 @@ const Register = () => {
         formData
       );
       console.log(data);
-      if (data.insertedId) {
+      if (data?.token) {
+        localStorage.setItem("token", data?.token);
+      }
+      if (data.result?.insertedId) {
         setFormData({
           username: "",
           password: "",
