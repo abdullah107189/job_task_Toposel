@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -14,7 +14,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch("/api/auth/login", {
-        // Your backend endpoint
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +23,7 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem("token", data.token); // Store the token
+        localStorage.setItem("token", data.token);
         console.log("Login successful");
         // Redirect to protected page
       } else {
@@ -33,7 +32,6 @@ const Login = () => {
           "Login failed:",
           errorData.message || "Invalid credentials"
         );
-        // Display error message
       }
     } catch (error) {
       console.error("Error:", error);
@@ -43,21 +41,18 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-white rounded shadow-md"
+      className=" p-4 bg-white m-10 shadow-lg rounded-lg grid grid-cols-2 gap-5"
     >
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center col-span-2">Login</h2>
       <div className="mb-4">
-        <label
-          htmlFor="username"
-          className="block text-gray-700 font-bold mb-2"
-        >
-          Username:
+        <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+          Email
         </label>
         <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
           onChange={handleChange}
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
@@ -68,7 +63,7 @@ const Login = () => {
           htmlFor="password"
           className="block text-gray-700 font-bold mb-2"
         >
-          Password:
+          Password
         </label>
         <input
           type="password"
@@ -82,7 +77,7 @@ const Login = () => {
       </div>
       <button
         type="submit"
-        className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Login
       </button>

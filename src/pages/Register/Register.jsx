@@ -1,4 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -14,47 +17,52 @@ const Register = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    if (formData.password.length <= 5) {
+      return toast.error("At least password 6 letter must");
+    }
 
-      if (response.ok) {
-        console.log("Registration successful");
-        // Redirect or show success message
-      } else {
-        const errorData = await response.json();
-        console.error(
-          "Registration failed:",
-          errorData.message || "Something went wrong"
-        );
-        // Display error message to the user
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4545/add-user",
+        formData
+      );
+      console.log(data);
+      if (data.insertedId) {
+        setFormData({
+          username: "",
+          password: "",
+          fullName: "",
+          gender: "",
+          dateOfBirth: "",
+          country: "",
+          email: "",
+        });
+        toast.success("Register Complete 😀");
+        navigate("/");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.log(error.message);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto p-4 bg-white rounded shadow-md"
+      className="p-10 rounded-lg shadow-lg bg-white grid grid-cols-2 gap-5 m-10"
     >
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
+      <h2 className="text-2xl font-bold mb-4 col-span-2 text-center ">
+        Register
+      </h2>
 
       <div className="mb-4">
         <label
           htmlFor="username"
           className="block text-gray-700 font-bold mb-2"
         >
-          Username:
+          Username
         </label>
         <input
           type="text"
@@ -69,7 +77,7 @@ const Register = () => {
 
       <div className="mb-4">
         <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
-          Email:
+          Email
         </label>
         <input
           type="email"
@@ -87,7 +95,7 @@ const Register = () => {
           htmlFor="password"
           className="block text-gray-700 font-bold mb-2"
         >
-          Password:
+          Password
         </label>
         <input
           type="password"
@@ -105,7 +113,7 @@ const Register = () => {
           htmlFor="fullName"
           className="block text-gray-700 font-bold mb-2"
         >
-          Full Name:
+          Full Name
         </label>
         <input
           type="text"
@@ -120,7 +128,7 @@ const Register = () => {
 
       <div className="mb-4">
         <label htmlFor="gender" className="block text-gray-700 font-bold mb-2">
-          Gender:
+          Gender
         </label>
         <select
           id="gender"
@@ -142,7 +150,7 @@ const Register = () => {
           htmlFor="dateOfBirth"
           className="block text-gray-700 font-bold mb-2"
         >
-          Date of Birth:
+          Date of Birth
         </label>
         <input
           type="date"
@@ -157,7 +165,7 @@ const Register = () => {
 
       <div className="mb-4">
         <label htmlFor="country" className="block text-gray-700 font-bold mb-2">
-          Country:
+          Country
         </label>
         <input
           type="text"
@@ -172,7 +180,7 @@ const Register = () => {
 
       <button
         type="submit"
-        className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Register
       </button>

@@ -1,26 +1,38 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-200 py-2 text-xl flex gap-5 justify-center">
-      <Link
-        className="bg-white/50 hover:bg-white py-1 px-4 rounded-md"
-        to={"/"}
+    <nav className="bg-gray-200 py-2 text-xl flex gap-5 justify-center sticky top-0">
+      <NavLink
+        className={({ isActive }) =>
+          ` hover:bg-white py-1 px-4 rounded-md ${
+            isActive ? "bg-white font-bold" : "bg-white/50"
+          }`
+        }
+        to="/"
       >
         Home
-      </Link>
-      <Link
-        className="bg-white/50 hover:bg-white py-1 px-4 rounded-md"
-        to={"/login"}
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          ` hover:bg-white py-1 px-4 rounded-md ${
+            isActive ? "bg-white font-bold" : "bg-white/50"
+          }`
+        }
+        to="/login"
       >
         Login
-      </Link>
-      <Link
-        className="bg-white/50 hover:bg-white py-1 px-4 rounded-md"
-        to={"/reg"}
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          ` hover:bg-white py-1 px-4 rounded-md ${
+            isActive ? "bg-white font-bold" : "bg-white/50"
+          }`
+        }
+        to="/reg"
       >
         Register
-      </Link>
+      </NavLink>
     </nav>
   );
 };
