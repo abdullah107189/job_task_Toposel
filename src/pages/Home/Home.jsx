@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <div className="p-4">
-      <h1 className="text-4xl text-center font-bold mb-4">All User Info</h1>
+      <h1 className="text-4xl text-center font-bold mb-4">All Users Info</h1>
       {/* input field  */}
       <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden my-2 w-2/3 mx-auto">
         <span className="p-2 bg-transparent">
