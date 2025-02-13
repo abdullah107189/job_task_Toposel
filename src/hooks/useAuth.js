@@ -7,7 +7,7 @@ const useAuth = () => {
     const handleStorageChange = () => {
       const newToken = localStorage.getItem("token");
       if (!newToken) {
-        window.location.reload(); // ✅ যদি token না থাকে, তাহলে পেজ রিলোড হবে
+        window.location.reload();
       }
     };
 

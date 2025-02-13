@@ -20,7 +20,7 @@ const Home = () => {
     queryKey: ["users", searchInput],
     queryFn: async () => {
       const { data } = await axios.get(
-        `http://localhost:4545/searchUser?query=${searchInput}`,
+        `https://job-task-toposel-server-side.vercel.app/searchUser?query=${searchInput}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

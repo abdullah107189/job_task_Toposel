@@ -25,7 +25,7 @@ const Login = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:4545/login-user?email=${formData?.email}&pass=${formData?.password}`
+        `https://job-task-toposel-server-side.vercel.app/login-user?email=${formData?.email}&pass=${formData?.password}`
       );
       if (data.status === true) {
         toast.success("Login Successful");
@@ -39,7 +39,7 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-      console.error("Error:", error);
+      toast.error(error.message);
     }
   };
 

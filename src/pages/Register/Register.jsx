@@ -28,10 +28,9 @@ const Register = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4545/add-user",
+        "https://job-task-toposel-server-side.vercel.app/add-user",
         formData
       );
-      console.log(data);
       if (data?.token) {
         localStorage.setItem("token", data?.token);
         setToken(true);
