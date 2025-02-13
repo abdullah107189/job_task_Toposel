@@ -43,9 +43,10 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" p-4 bg-white m-10 shadow-lg rounded-lg grid grid-cols-2 gap-5"
+      className="p-4 bg-white m-10 shadow-lg rounded-lg grid grid-cols-2 gap-5"
     >
       <h2 className="text-2xl font-bold mb-4 text-center col-span-2">Login</h2>
+
       <div className="mb-4">
         <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
           Email
@@ -56,10 +57,12 @@ const Login = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          placeholder="Enter your email" // ✅ Placeholder Added
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
       </div>
+
       <div className="mb-6">
         <label
           htmlFor="password"
@@ -73,14 +76,16 @@ const Login = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          placeholder="Enter your password" // ✅ Placeholder Added
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
       </div>
+
       <button
         type="submit"
         className="col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
-        disabled={loading} // Disable button while loading
+        disabled={loading}
       >
         {loading ? (
           <span className="flex items-center justify-center">

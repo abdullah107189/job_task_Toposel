@@ -73,6 +73,7 @@ const Register = () => {
           name="username"
           value={formData.username}
           onChange={handleChange}
+          placeholder="Enter your username"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -88,6 +89,7 @@ const Register = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
+          placeholder="Enter your email"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -106,6 +108,7 @@ const Register = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
+          placeholder="Enter your password"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -124,6 +127,7 @@ const Register = () => {
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
+          placeholder="Enter your full name"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -176,6 +180,7 @@ const Register = () => {
           name="country"
           value={formData.country}
           onChange={handleChange}
+          placeholder="Enter your country"
           className="border border-gray-300 rounded w-full py-2 px-3 focus:outline-none focus:border-indigo-500"
           required
         />
@@ -183,7 +188,7 @@ const Register = () => {
 
       <button
         type="submit"
-        className="cursor-pointer col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="cursor-pointer col-span-2 bg-indigo-500 hover:bg-indigo- 700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Register
       </button>

@@ -16,7 +16,7 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        className={({ isActive }) =>
+        className={({ isActive }) =>    
           ` py-1 px-4 rounded-md ${
             isActive
               ? "bg-indigo-500  text-white font-semibold py-1 px-4 rounded focus:outline-none focus:shadow-outline"
