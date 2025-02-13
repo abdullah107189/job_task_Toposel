@@ -18,7 +18,6 @@ const Home = () => {
       const { data } = await axios.get(
         `http://localhost:4545/searchUser?query=${searchInput}`
       );
-      console.log(data);
       return data;
     },
   });
