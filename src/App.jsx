@@ -3,9 +3,11 @@ import Navbar from "./componets/Navbar/Navbar";
 
 function App() {
   return (
-    <div className="text-blue-400">
+    <div className="">
       <Navbar></Navbar>
-      <Outlet></Outlet>
+      <div className="max-w-[1440px] mx-auto" style={{ minHeight: `calc(100vh - 54px)` }}>
+        <Outlet></Outlet>
+      </div>
     </div>
   );
 }
