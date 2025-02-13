@@ -25,9 +25,9 @@ const Login = () => {
       const { data } = await axios.get(
         `http://localhost:4545/login-user?email=${formData?.email}&pass=${formData?.password}`
       );
-      console.log(data);
       if (data.status === true) {
         toast.success("Login Successful");
+        localStorage.setItem("token", data?.token);
         navigate("/");
         setLoading(false);
       } else {
@@ -35,6 +35,7 @@ const Login = () => {
         toast.error(data?.message);
       }
     } catch (error) {
+      setLoading(false);
       console.error("Error:", error);
     }
   };
