@@ -1,10 +1,15 @@
+import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,26 +17,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password.length <= 5) {
+      return toast.error("At least password 6 letter must");
+    }
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        console.log("Login successful");
-        // Redirect to protected page
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:4545/login-user?email=${formData?.email}&pass=${formData?.password}`
+      );
+      console.log(data);
+      if (data.status === true) {
+        toast.success("Login Successful");
+        navigate("/");
+        setLoading(false);
       } else {
-        const errorData = await response.json();
-        console.error(
-          "Login failed:",
-          errorData.message || "Invalid credentials"
-        );
+        setLoading(false);
+        toast.error(data?.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -77,9 +78,36 @@ const Login = () => {
       </div>
       <button
         type="submit"
-        className="col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="col-span-2 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+        disabled={loading} // Disable button while loading
       >
-        Login
+        {loading ? (
+          <span className="flex items-center justify-center">
+            <svg
+              className="animate-spin h-5 w-5 mr-3 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 100 8v4a8 8 0 01-8-8z"
+              />
+            </svg>
+            Loading...
+          </span>
+        ) : (
+          "Login"
+        )}
       </button>
     </form>
   );
